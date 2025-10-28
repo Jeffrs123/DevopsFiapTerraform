@@ -16,6 +16,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        # with:
+          # # terraform_version: 1.4.2
+          # cli_config_credentials_token: ghaot-RdSFhNWqHkWZi7J1
+          # # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -24,14 +31,7 @@ jobs:
           aws-session-token: IQoJb3JpZ2luX2VjEPj//////////wEaCXVzLXdlc3QtMiJIMEYCIQCQbMpVtfTBXsvKoHhwulozfP1sFPuWYwV4BcMZP68UYgIhAKNXfXITXA5x8LU/sYCWtrYXQCwCNf4ON7qX/ZwTvYrhKrcCCLH//////////wEQABoMOTc1MDUwMDAwMjQzIgwyho2TUnbSc5VcE6YqiwKmuiYWqMHz9KntJZCkS/QGNrNPubYDmBEpENg/RpzW1ZiPW6Xsp5UozXxQzApTQX2ORgRRrmLqhW8fMKSGoo8Wf8A98KKa+sMDenhWMjrGqaXO4Nc+u/iM+hYy1t1l5GJAE8fMtrC6cGSMiKap9RJPCYaJThn6gokzT4Cw7NR9X+8BHYXzURBJxveCqOLXIUmdj68qszQMrbr4x2g4SZEjyWDNyg/t1OH9OVMMhBxWTrb9ixvV6oF1MCm1Bb/qMH1I2wELft7bXrlDFj5EdrdfAorwsP3BtUMq1AXNyV1x/iJjya0ikU/K/8+vBOtNPDr4SggI8EfbF+vGMv84kV5V++X+t7CfpqZG2XIw34mAyAY6nAFg5/Kjuk+lYTnvtcE6nf9KYfUR9WP2AzCJ6tuVwkYxlSTJaxzOis7dwHa3DwTANWX1SU5M/BYP82llrfN8JohPCCm5TBXyASRJp8nqW7rnedYqQvsATg6isdOI2oNSNUO8Ljr5fxsOAdpNQacEEtRICsjnwBa6bLUPIgZANNrsMvv6BtGmByaUEh/aRCg/oxh8vQUx2yMK5pkuhkQ=
           # aws-region: ${{ env.AWS_REGION }}         
           aws-region: us-east-1
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          # terraform_version: 1.4.2
-          cli_config_credentials_token: ghaot-RdSFhNWqHkWZi7J1
-          # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
+          
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
