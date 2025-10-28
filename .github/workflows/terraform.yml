@@ -3,7 +3,7 @@ name: "Terraform"
 on:
   push:
     branches:
-      - develop2
+      - main
   pull_request:
 
 jobs:
@@ -16,12 +16,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v2
         # with:
-          # # terraform_version: 1.4.2
-          # cli_config_credentials_token: ghaot-RdSFhNWqHkWZi7J1
-          # # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+        #   # terraform_version: 1.4.2
+        #   cli_config_credentials_token: ghaot-RdSFhNWqHkWZi7J1
+        #   # cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -32,6 +32,10 @@ jobs:
           # aws-region: ${{ env.AWS_REGION }}
           aws-region: us-east-1
           
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
